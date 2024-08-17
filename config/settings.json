@@ -1,0 +1,45 @@
+{
+    "video": {
+        "width": 1280,
+        "height": 720,
+        "fps": 0,
+        "vsync": 1,
+        "showFps": true
+    },
+    "language": {
+        "languageSet": "en-US",
+        "en-US": {
+            "score": "Score",
+            "start": "Start",
+            "options": "Options",
+            "exit": "Exit",
+            "showFps": "Show FPS",
+            "language": "English",
+            "fullscreen": "Fullscreen"
+        },
+        "pt-BR": {
+            "score": "Pontuação",
+            "start": "Iniciar",
+            "options": "Opções",
+            "exit": "Sair",
+            "showFps": "Mostrar FPS",
+            "language": "Português",
+            "fullscreen": "Tela cheia"
+        }
+    },
+    "audio": {
+        "mainVolume": 100
+    },
+    "gameData": {
+        "timesPlayed": 0,
+        "highScore": 0,
+        "maxEnemiesDefeated": 0
+    },
+    "keys": {
+        "up": "w",
+        "down": "s",
+        "left": "a",
+        "right": "d",
+        "shoot": "space"
+    }
+}
