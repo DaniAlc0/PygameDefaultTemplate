@@ -67,3 +67,28 @@ class Button(TextButton):
             self.textColor = self.textCurrentColor
             self.pressed = False
             return False
+
+class Slider(Button):
+    def __init__(self, screen, pos, sliderValue, size=(300, 30), multiplier=1, buttonColor = (100,100,100), buttonHoverColor = (100,100,100), borderRadius = 20, padding = 20, pointerRadius = 8):
+        super().__init__(screen, pos, size, buttonColor=buttonColor, buttonHoverColor=buttonHoverColor, borderRadius=borderRadius)
+        self.padding = padding
+        self.pointerRadius = pointerRadius
+        self.multiplier = multiplier
+        self.pointerPos = int(((self.buttonRect.width - self.padding*2) * sliderValue / 100) / multiplier) + self.padding
+
+    def drawSlider(self):
+        self.draw('')
+        pygame.draw.line(self.screen, (0,0,0), (self.buttonX + self.padding, self.buttonY+self.buttonRect.height/2), (self.buttonRect.width - self.padding + self.buttonX, self.buttonRect.height/2 + self.buttonY), width=2)
+        pygame.draw.circle(self.screen, (0,0,0), (self.buttonX + self.pointerPos, self.buttonY+self.buttonRect.height/2), radius=self.pointerRadius)
+    
+    def clickSlider(self, aspectRatio):
+        mousePos = pygame.mouse.get_pos()
+        updatedRect = pygame.Rect((self.buttonX + self.padding)*aspectRatio[0], self.buttonY*aspectRatio[1], (self.buttonRect.width-self.padding*2)*aspectRatio[0], self.buttonRect.height*aspectRatio[1])
+        if updatedRect.collidepoint(mousePos):
+            if pygame.mouse.get_pressed()[0]:
+                self.pointerPos =  mousePos[0] - updatedRect.x
+                self.sliderValue = round((self.pointerPos*100/updatedRect.width)*self.multiplier)
+                # self.pointerPos = (self.pointerPos + self.padding) / aspectRatio[0] # Smooth
+                self.pointerPos = int(((self.buttonRect.width - self.padding*2) * self.sliderValue / 100) / self.multiplier) + self.padding # Truncated
+                return True
+        return False

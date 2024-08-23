@@ -1,6 +1,6 @@
 import pygame
 from scripts.text import Label
-from scripts.button import Button
+from scripts.button import Button, Slider
 
 class Menu():
     def __init__(self, game):
@@ -21,6 +21,8 @@ class Menu():
         self.button6 = Button(self.screen, pos=(500, 300), borderRadius=20, shadowSize=(6,6), border=2)
         self.button7 = Button(self.screen, pos=(500, 450), borderRadius=20, shadowSize=(6,6), textColor=(255,255,255), textHoverColor=(255,255,255), buttonColor=(20,20,20), buttonHoverColor=(0,0,0), shadowColor=(100,100,100))
         self.button8 = Button(self.screen, pos=(1200, 30), size=(150, 50), textFontSize=50, borderRadius=20, shadowSize=(6,6), border=2)
+
+        self.slider = Slider(self.screen, pos=(850, 150), sliderValue=self.game.audioSettings['mainVolume'])
 
     def run(self):
         self.events()
@@ -61,6 +63,7 @@ class Menu():
         self.button7.draw(f'VSync - {status}')
         self.text.write(self.game.gameTexts['language'], (int(self.game.WIDTH/2), 0), centerW=True)
         self.button8.draw(self.game.gameTexts['exit'])
+        self.slider.drawSlider()
 
     def inputs(self):
         # Handle button clicks.
@@ -84,3 +87,5 @@ class Menu():
             self.game.resizeScreen(self.game.videoSettings['width'], self.game.videoSettings['height'], self.game.videoSettings['vsync'])
         if self.button8.click(self.game.aspectRatio):
             self.game.running = False
+        if self.slider.clickSlider(self.game.aspectRatio):
+            self.game.setSettings('audio', 'mainVolume', self.slider.sliderValue)
