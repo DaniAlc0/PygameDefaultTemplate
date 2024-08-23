@@ -7,7 +7,7 @@
         "showFps": true
     },
     "language": {
-        "languageSet": "en-US",
+        "languageSet": "pt-BR",
         "en-US": {
             "score": "Score",
             "start": "Start",
@@ -28,7 +28,7 @@
         }
     },
     "audio": {
-        "mainVolume": 100
+        "mainVolume": 63
     },
     "gameData": {
         "timesPlayed": 0,

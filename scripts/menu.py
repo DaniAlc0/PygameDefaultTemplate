@@ -13,14 +13,14 @@ class Menu():
 
         # Create text and button objects.
         self.text = Label(self.screen)
-        self.button1 = Button(self.screen, 300, 100, (150, 150), 20)
-        self.button2 = Button(self.screen, 300, 100, (150, 300), 20)
-        self.button3 = Button(self.screen, 300, 100, (150, 450), 20)
-        self.button4 = Button(self.screen, 300, 100, (500, 600), 20)
-        self.button5 = Button(self.screen, 300, 100, (500, 150), 20)
-        self.button6 = Button(self.screen, 300, 100, (500, 300), 20)
-        self.button7 = Button(self.screen, 300, 100, (500, 450), 20)
-        self.button8 = Button(self.screen, 150, 50, (1200, 30), 20, 50)
+        self.button1 = Button(self.screen, pos=(150, 150))
+        self.button2 = Button(self.screen, pos=(150, 300), borderRadius=20, textColor=(0,0,255), textHoverColor=(255,0,0))
+        self.button3 = Button(self.screen, pos=(150, 450), shadowSize=(6,6))
+        self.button4 = Button(self.screen, pos=(500, 600), border=2, transparency=-1, textHoverColor=(128,128,128))
+        self.button5 = Button(self.screen, pos=(500, 150), border=2, borderRadius=20)
+        self.button6 = Button(self.screen, pos=(500, 300), borderRadius=20, shadowSize=(6,6), border=2)
+        self.button7 = Button(self.screen, pos=(500, 450), borderRadius=20, shadowSize=(6,6), textColor=(255,255,255), textHoverColor=(255,255,255), buttonColor=(20,20,20), buttonHoverColor=(0,0,0), shadowColor=(100,100,100))
+        self.button8 = Button(self.screen, pos=(1200, 30), size=(150, 50), textFontSize=50, borderRadius=20, shadowSize=(6,6), border=2)
 
     def run(self):
         self.events()
@@ -39,7 +39,7 @@ class Menu():
     def draw(self):
         # Scale the screen surface to fit the display surface.
         self.game.scaleScreen(self.screen)
-        self.screen.fill('white')
+        self.screen.fill((255,255,255))
 
         # Draw buttons with their respective text.
         self.button1.draw('1600x900')
@@ -59,7 +59,7 @@ class Menu():
         else:
             status = 'OFF'
         self.button7.draw(f'VSync - {status}')
-        self.text.write(self.game.gameTexts['language'], (int(self.game.WIDTH/2), 0), True)
+        self.text.write(self.game.gameTexts['language'], (int(self.game.WIDTH/2), 0), centerW=True)
         self.button8.draw(self.game.gameTexts['exit'])
 
     def inputs(self):
